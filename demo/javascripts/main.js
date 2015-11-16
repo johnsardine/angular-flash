@@ -86,25 +86,25 @@ app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$timeout', fu
         $scope.lists.push($scope.lastAdded);
         $scope.newList = '';
         var message = "<strong>List Created!</strong> The list <em>" + $scope.lastAdded.content + "</em> has been created. <a ng-click='undoAdd();' href=''>Undo</a>";
-        Flash.create('danger', message, 'customAlert');
+        Flash.toLocation('tasklist', 'danger', message, 'customAlert');
     };
 
     $scope.delete = function (item) {
         $scope.deletedItem = item;
         $scope.lists.splice($scope.lists.indexOf(item), 1);
         var message = "<strong>List Deleted!</strong> The list <em>" + $scope.deletedItem.content + "</em> has been deleted. <a ng-click='undoDelete();' href=''>Undo</a>";
-        Flash.create('danger', message, 'customAlert');
+        Flash.toLocation('tasklist', 'danger', message, 'customAlert');
     };
 
     $scope.undoAdd = function () {
         $scope.deletedItem = $scope.lastAdded;
         $scope.lists.splice($scope.lists.indexOf($scope.lastAdded), 1);
         var message = "<strong>List Deleted!</strong> The list <em>" + $scope.deletedItem.content + "</em> has been deleted.";
-        Flash.create('danger', message, 'customAlert');
+        Flash.toLocation('tasklist', 'danger', message, 'customAlert');
     };
 
     $scope.undoDelete = function () {
-        Flash.create('danger', '<span id="spinner"></span>', 'customAlert');
+        Flash.toLocation('tasklist', 'danger', '<span id="spinner"></span>', 'customAlert');
         Flash.pause();
         setTimeout(function(){
             var opts = {
@@ -132,7 +132,7 @@ app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$timeout', fu
         setTimeout(function(){
             $scope.lists.push($scope.deletedItem);
             var message = "<strong>List Restored!</strong> The list <em>'" + $scope.deletedItem.content + "'</em> has been restored.";
-            Flash.create('danger', message, 'customAlert');
+            Flash.toLocation('tasklist', 'danger', message, 'customAlert');
         },800);
     };
 

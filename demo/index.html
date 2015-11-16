@@ -53,6 +53,7 @@
             </div>
             <div class="section">
                 <h3><a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Another Demo</h3>
+                <div flash-message="3000" flash-message-location="tasklist"></div>
                 <div class="listDemoCont">
                     <ul class="listDemo">
                         <li ng-repeat="list in lists | orderBy:'createdOn'">
@@ -90,7 +91,7 @@
 var myApp = angular.module("app", ["flash"]);</pre>
             <p>Include <span style="font-size:13px;"><span class="atn">flash-message</span><span class="pun">=</span><span class="atv">"5000"</span></span> directive in your html template.</p>
             <pre class="prettyprint linenums">
-&lt;div flash-message="5000" &gt;&lt;/div&gt; 
+&lt;div flash-message="5000" &gt;&lt;/div&gt;
 // 5000 milli-secs is the display duration.
 // Flash alert will be automatically dismissed after 5000 milli-secs.</pre>
             <p>Inject the <span class="atv">Flash</span> factory in your controller</p>
@@ -115,6 +116,17 @@ myApp.controller('demoCtrl', ['Flash', function(Flash) {
                 <li>warning</li>
                 <li>danger</li>
               </ul>
+            </div>
+
+            <div class="section">
+            <h3><a id="type" class="anchor" href="#type" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flash to specific locations</h3>
+              <p>You can flash to a specific location</p>
+              <p>In template…</p>
+<pre class="prettyprint linenums">
+&lt;div flash-message=&quot;3000&quot; flash-message-location=&quot;tasklist&quot;&gt;&lt;/div&gt;</pre>
+              <p>In controller…</p>
+<pre class="prettyprint linenums">
+Flash.toLocation('tasklist', 'success', 'To-do deleted', 'custom-class');</pre>
             </div>
 
             <div class="section">

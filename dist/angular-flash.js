@@ -1,4 +1,4 @@
-/*! angular-flash - v1.0.0 - 2015-03-19
+/*! angular-flash - v1.1.1 - 2015-11-15
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2015 Sachin; Licensed MIT */
 (function() {
@@ -8,9 +8,11 @@
     app.run(['$rootScope', function($rootScope) {
         // initialize variables
         $rootScope.flash = {};
-        $rootScope.flash.text = '';
-        $rootScope.flash.type = '';
-        $rootScope.flash.timeout = 5000;
+        $rootScope.flash.default = {
+            text: '',
+            type: '',
+            timeout: 5000,
+        };
         $rootScope.hasFlash = false;
     }]);
 
@@ -55,21 +57,22 @@
         function($rootScope, $timeout) {
 
             var dataFactory = {},
-                timeOut;
+                timeOut,
+                defaultLocation = 'default';
 
             // Create flash message
             dataFactory.create = function(type, text, addClass) {
                 var $this = this;
                 $timeout.cancel(timeOut);
-                $rootScope.flash.type = type;
-                $rootScope.flash.text = text;
-                $rootScope.flash.addClass = addClass;
+                $rootScope.flash[defaultLocation].type = type;
+                $rootScope.flash[defaultLocation].text = text;
+                $rootScope.flash[defaultLocation].addClass = addClass;
                 $timeout(function() {
                     $rootScope.hasFlash = true;
                 }, 100);
                 timeOut = $timeout(function() {
                     $this.dismiss();
-                }, $rootScope.flash.timeout);
+                }, $rootScope.flash[defaultLocation].timeout);
             };
 
             // Cancel flashmessage timeout function
